@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from whois_token import WHOIS_API_KEY
 import requests, json
-import os
 
 app = Flask(__name__)
 
@@ -16,7 +15,6 @@ def get_details(domain):
     url = f"https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey={WHOIS_API_KEY}&outputFormat=JSON&domainName={domain}"
     response = requests.get(url)
     return (response.json())
-
 
 if __name__ == '__main__':
     app.run(debug=True)
