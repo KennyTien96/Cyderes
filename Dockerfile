@@ -11,5 +11,7 @@ RUN pip install -r requirements.txt
 
 # Copy app to Docker image
 COPY app.py /code/
+COPY templates /code/templates
+COPY whois_token.py /code/
 
 CMD gunicorn app:app -w 2 --threads 2 -b 0.0.0.0:${PORT}
