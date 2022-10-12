@@ -102,7 +102,7 @@ resource "google_artifact_registry_repository_iam_member" "docker_pusher_iam" {
 # Deploy image to Cloud Run
 resource "google_cloud_run_service" "api_test" {
   provider = google-beta
-  name     = "api-test"
+  name     = "cyderes-assessment"
   location = var.region
   template {
     spec {
@@ -141,7 +141,7 @@ data "google_iam_policy" "noauth" {
   }
 }
 
-# Apply the no-authentication policy to our Cloud Run Service.
+# Apply no-auth policy to Cloud Run Service.
 resource "google_cloud_run_service_iam_policy" "noauth" {
   provider = google-beta
   location    = var.region
