@@ -1,0 +1,9 @@
+ll_env
+whois_token.py
+__pycache__
+*.json
+*.backup
+*.hcl
+*.tfstate
+.env
+.terraform
