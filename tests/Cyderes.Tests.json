@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "31933c8a-88b9-4117-8630-bc268f212997",
+		"name": "Cyderes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4979041"
+	},
+	"item": [
+		{
+			"name": "Home and API Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Home page status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Text on homepage is displayed\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Cyderes Assessment\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"API that returns JSON data of valid IPv4/v6 address or domain. Append the IP address or domain to the URL to send the API request\");\r",
+							"});\r",
+							"\r",
+							"pm.sendRequest(\"https://cyderes-assessment-tigecyl3va-wl.a.run.app/google.com\", function (err, response) {\r",
+							"    let jsondata = response.json()\r",
+							"    pm.test(\"Valid domain request\", function () {\r",
+							"        pm.expect(jsondata.WhoisRecord.administrativeContact.organization).to.eql('Google LLC');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.sendRequest(\"https://cyderes-assessment-tigecyl3va-wl.a.run.app/69.162.81.155\", function (err, response) {\r",
+							"    let jsondata = response.json()\r",
+							"    pm.test(\"Valid IPv4 request\", function () {\r",
+							"        pm.expect(jsondata.WhoisRecord.registrarName).to.eql('ARIN');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.sendRequest(\"https://cyderes-assessment-tigecyl3va-wl.a.run.app/2607:fc88:100:2b::2\", function (err, response) {\r",
+							"    let jsondata = response.json()\r",
+							"    pm.test(\"Valid IPv6 request\", function () {\r",
+							"        console.log(jsondata.WhoisRecord.registrarName)\r",
+							"        pm.expect(jsondata.WhoisRecord.registrarName).to.eql('ARIN');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.sendRequest(\"https://cyderes-assessment-tigecyl3va-wl.a.run.app/invaliddomain\", function (err, response) {\r",
+							"    let jsondata = response.json()\r",
+							"    pm.test(\"Invalid request\", function () {\r",
+							"        pm.expect(jsondata.ErrorMessage.errorCode).to.eql('WHOIS_01');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://cyderes-assessment-tigecyl3va-wl.a.run.app/test",
+					"protocol": "https",
+					"host": [
+						"cyderes-assessment-tigecyl3va-wl",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"test"
+					]
+				},
+				"description": "Testing homepage of Cyderes API"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

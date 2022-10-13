@@ -1,7 +1,8 @@
 ll_env
 whois_token.py
 __pycache__
-*.json
+docker_service_account.json
+infra_service_account.json
 *.backup
 *.hcl
 *.tfstate
